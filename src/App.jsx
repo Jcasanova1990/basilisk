@@ -2,13 +2,14 @@ import React, { useEffect, useRef } from 'react';
 import styles from './App.module.scss';
 import { useMediaQuery } from 'react-responsive';
 import ThreeCanvas from './components/ThreeCanvas';
+import ReactDOM from 'react-dom/client';
 
 function App() {
   const isMobile = useMediaQuery({ query: '(max-width: 600px)' });
   const gameRef = useRef(null);
 
   useEffect(() => {
-    if (gameRef.current) {
+    if (gameRef.current?.startGame) {
       gameRef.current.startGame();
     }
   }, []);
@@ -27,5 +28,11 @@ function App() {
     </div>
   );
 }
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
 export default App;
